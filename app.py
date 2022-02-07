@@ -32,7 +32,7 @@ app = Flask(__name__)
 
 @app.route("/home")
 def home():
-        return render_template( "index.html" )
+        return render_template( "login page.html" )
 
 
 
@@ -141,7 +141,7 @@ def prediction():
     # return summary
     print("summary",type(summarizedTextOutput))
     print("summary",summarizedTextOutput)
-    return render_template('output.html', summary=summarizedTextOutput)
+    return render_template('summarydisplay.html', summary=summarizedTextOutput)
 
         # print(summarise(text))
 

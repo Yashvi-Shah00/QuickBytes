@@ -6,20 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="assets/img/favicon.ico">
-	<title>Saved Articles</title>
+	<link rel="icon" href="../static/listArticles/assets/img/favicon.ico">
+	<title>Latest Articles</title>
 	<!-- Bootstrap core CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/listArticles/assets/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Fonts -->
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="assets/css/mediumish.css" rel="stylesheet">
+	<link href="../static/listArticles/assets/css/mediumish.css" rel="stylesheet">
+	<link rel="stylesheet" href="../static/listArticles/css/mdb.min.css" />
+	<link rel="stylesheet" href="../static/listArticles/css/style.css" />
 	<style>
-		span .post-date a {
-			color: black;
-		}
-
 		.topnav {
 			overflow: hidden;
 			background-color: #333;
@@ -51,17 +49,18 @@
 	</style>
 </head>
 
-<body style="padding-top: 0%;">
+<body style="padding-top: 0;">
 	<div class="topnav">
 		<a
-			href="..\select newspaper\select newspaper.html"><b><i>QuickBytes</i></b></a>
-		<a href="..\select newspaper\select newspaper.html"><i
+			href="./select_newspaper.html"><b><i>QuickBytes</i></b></a>
+		<a href="./select_newspaper.html"><i
 				class="fa fa-newspaper-o" aria-hidden="true"></i> Change Newspaper</a>
-		<a href="#"><i class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
+		<a href="./saved_articles.html"><i
+				class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
 		<div class="topnav-right">
-			<a href="..\feedback\Feedback Form.html"><i
+			<a href="./feedback_form.html"><i
 					class="fa fa-pencil" aria-hidden="true"></i> Feedback</a>
-			<a href="..\login\login page.html"><i
+			<a href="./login_page.html"><i
 					class="fa fa-user-o" aria-hidden="true"></i> Logout?</a>
 		</div>
 	</div>
@@ -70,7 +69,7 @@
 ================================================== -->
 	<div class="container">
 		<div class="mainheading">
-			<h2>Saved Articles</h2>
+			<h2>Selected Newspaper Name</h2>
 		</div>
 		<!-- End Site Title
 ================================================== -->
@@ -78,7 +77,9 @@
 		<!-- Begin Featured
 	================================================== -->
 		<section class="featured-posts">
-
+			<div class="section-title">
+				<h2><span>Latest Posts</span></h2>
+			</div>
 			<div class="card-columns listfeaturedtag">
 
 				<!-- begin post -->
@@ -93,7 +94,7 @@
 						<div class="col-md-7">
 							<div class="card-block">
 								<h2 class="card-title"><a
-										href="..\display_summary\summarydisplay.html">Article
+										href="./summary_display.html">Article
 										1</a></h2>
 								<h4 class="card-text">This is a longer card with supporting text below as a natural
 									lead-in to additional content. This content is a little bit longer.</h4>
@@ -101,12 +102,16 @@
 									<div class="wrapfooter">
 
 										<span class="author-meta">
-											<span class="post-date"><a href="#">Read Full Article</a></span><span
-												class="dot"></span>
-											<span class="post-date"><a
-													href="..\display_summary\summarydisplay.html">Read
-													Summary</a></span><span class="dot"></span>
+											<span class="post-date">22 July 2017</span><span class="dot"></span>
 										</span>
+										<span class="post-read-more"><a
+												href="./saved_articles.html"
+												title="Save Article"><svg class="svgIcon-use" width="25" height="25"
+													viewbox="0 0 25 25">
+													<path
+														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+														fill-rule="evenodd"></path>
+												</svg></a></span>
 									</div>
 								</div>
 							</div>
@@ -119,25 +124,29 @@
 				<div class="card">
 					<div class="row">
 						<div class="col-md-5 wrapthumbnail">
-							<a href="post.html">
+							<a href="#">
 								<div class="thumbnail" style="background-image:url(assets/img/demopic/1.jpg);">
 								</div>
 							</a>
 						</div>
 						<div class="col-md-7">
 							<div class="card-block">
-								<h2 class="card-title"><a href="post.html">Article 2</a></h2>
+								<h2 class="card-title"><a href="#">Article 2</a></h2>
 								<h4 class="card-text">This is a longer card with supporting text below as a natural
 									lead-in to additional content. This content is a little bit longer.</h4>
 								<div class="metafooter">
 									<div class="wrapfooter">
 
 										<span class="author-meta">
-											<span class="post-date"><a href="#">Read Full Article</a></span><span
-												class="dot"></span>
-											<span class="post-date"><a href="#">Read Summary</a></span><span
-												class="dot"></span>
+											<span class="post-date">22 July 2017</span><span class="dot"></span>
 										</span>
+										<span class="post-read-more"><a href="https://efv-datascience.ifi.lmu.de/"
+												title="Save Article"><svg class="svgIcon-use" width="25" height="25"
+													viewbox="0 0 25 25">
+													<path
+														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+														fill-rule="evenodd"></path>
+												</svg></a></span>
 									</div>
 								</div>
 							</div>
@@ -164,11 +173,14 @@
 									<div class="wrapfooter">
 
 										<span class="author-meta">
-											<span class="post-date"><a href="#">Read Full Article</a></span><span
-												class="dot"></span>
-											<span class="post-date"><a href="#">Read Summary</a></span><span
-												class="dot"></span>
+											<span class="post-date">22 July 2017</span><span class="dot"></span>
 										</span>
+										<span class="post-read-more"><a href="post.html" title="Save Article"><svg
+													class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
+													<path
+														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+														fill-rule="evenodd"></path>
+												</svg></a></span>
 									</div>
 								</div>
 							</div>
@@ -195,11 +207,14 @@
 									<div class="wrapfooter">
 
 										<span class="author-meta">
-											<span class="post-date"><a href="#">Read Full Article</a></span><span
-												class="dot"></span>
-											<span class="post-date"><a href="#">Read Summary</a></span><span
-												class="dot"></span>
+											<span class="post-date">22 July 2017</span><span class="dot"></span>
 										</span>
+										<span class="post-read-more"><a href="post.html" title="Save Article"><svg
+													class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
+													<path
+														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+														fill-rule="evenodd"></path>
+												</svg></a></span>
 									</div>
 								</div>
 							</div>
@@ -219,12 +234,12 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="../static/listArticles/assets/js/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
 		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
 		crossorigin="anonymous"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="../static/listArticles/assets/js/bootstrap.min.js"></script>
+	<script src="../static/listArticles/assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 
 </html>
