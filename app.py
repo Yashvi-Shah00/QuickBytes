@@ -1,3 +1,4 @@
+import re
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 import string
@@ -9,6 +10,16 @@ from flask import Flask , render_template , request
 
 # todo:Add imports
 import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk.cluster.util import cosine_distance
+import numpy as np
+import pandas as pd
+import networkx as nx
+#import rouge
+import sys
+sys.path.insert(1, 'D:\School\Sem 7\Major project\Final Project\QuickBytes\Preprocessing')
+from normalization import normalize_corpus
 # import ssl
 # try:
 #     _create_unverified_https_context = ssl._create_unverified_context
@@ -21,11 +32,6 @@ import nltk
 
 # nltk.download('stopwords')
 
-from nltk.corpus import stopwords
-from nltk.cluster.util import cosine_distance
-import numpy as np
-import networkx as nx
-
 # app = Flask("Text_summarizer")
 app = Flask(__name__)
 
@@ -33,6 +39,10 @@ app = Flask(__name__)
 @app.route("/home")
 def home():
         return render_template( "login_page.html" )
+
+@app.route("/input")
+def input():
+        return render_template( "index.html" )
 
 
 
@@ -60,7 +70,7 @@ def read_article():
 
     # for sentence in article:
     for sentence in filedata:
-        sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
+        sentences.append(sentence.replace("^[a-zA-Z0-9!@#$&()-`+,/\"]", " ").split(" "))
     sentences.pop() 
     print("sentences",sentences)
     return sentences
@@ -108,7 +118,7 @@ def build_similarity_matrix(sentences, stop_words):
 @app.route("/process" , methods = ["POST"] )
 
 def prediction():
-    top_n = 5
+    top_n = 10
     print("check1")
     # nltk.download("stopwords")
     stop_words = stopwords.words('english')
@@ -118,9 +128,10 @@ def prediction():
     get_sentences =  read_article()
     print("get_sentences:",get_sentences)
     print("stop_words:",stop_words)
+    normalized_sentences = normalize_corpus(get_sentences)
 
     # Step 2 - Generate Similary Martix across sentences
-    sentence_similarity_martix = build_similarity_matrix(get_sentences, stop_words)
+    sentence_similarity_martix = build_similarity_matrix(normalized_sentences, stop_words)
 
     # Step 3 - Rank sentences in similarity martix
     sentence_similarity_graph = nx.from_numpy_array(sentence_similarity_martix)
@@ -132,7 +143,8 @@ def prediction():
     print("Indexes of top ranked_sentence order are ", ranked_sentence)    
 
     for i in range(top_n):
-      summarize_text.append(" ".join(ranked_sentence[i][1]))
+        if(i<len(ranked_sentence)):
+            summarize_text.append(" ".join(ranked_sentence[i][1]))
 
     # Step 5 - Offcourse, output the summarize texr
     print("Summarize Text: \n", ". ".join(summarize_text))
@@ -141,7 +153,7 @@ def prediction():
     # return summary
     print("summary",type(summarizedTextOutput))
     print("summary",summarizedTextOutput)
-    return render_template('summarydisplay.html', summary=summarizedTextOutput)
+    return render_template('summary_display.html', summary=summarizedTextOutput)
 
         # print(summarise(text))
 
