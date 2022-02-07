@@ -32,7 +32,7 @@ app = Flask(__name__)
 
 @app.route("/home")
 def home():
-        return render_template( "login page.html" )
+        return render_template( "login_page.html" )
 
 
 
