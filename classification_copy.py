@@ -104,9 +104,12 @@ tfidvectorizer = TfidfVectorizer(min_df=2,
                                  use_idf=True)
 tfid_train_features = tfidvectorizer.fit_transform(training_set)
 
-tfid_test_features = tfidvectorizer.transform(test_set)
+article=["NEW YORK (TheStreet) -- Shares of eBay Inc (EBAY - Get Report) are down 1.5% today following news of a rift with activist investor Carl Icahn. eBay has rejected Icahn's nominations for the company's board of directors and has asked that investors reject the nominations as well. Icahn -- who owns 2% of the company -- nominated Icahn Enterprises LP employees Daniel Ninivaggi and Jonathan Christodoro for the positions. Must Read: Warren Buffet's 10 Favorite Stocks STOCKS TO BUY: TheStreet Quant Ratings has identified a handful of stocks that can potentially TRIPLE in the next 12 months. Learn more. This isn't the first rift between Icahn and eBay. The activisit investor has been a vocal proponent of eBay splitting from online pay service PayPal. eBay, meanwhile, has repeatedly rejected any consideration of such a split. Icahn accused chief executive Jon Donahoe of ""inexcusable incompetence"" Monday for failing to see the value of separating the upstart PayPal service from eBay. TheStreet Ratings team rates EBAY INC as a Buy with a ratings score of A. TheStreet Ratings Team has this to say about their recommendation: We rate EBAY INC (EBAY) a BUY. This is based on the convergence of positive investment measures, which should help this stock outperform the majority of stocks that we rate. The company's strengths can be seen in multiple areas, such as its revenue growth, largely solid financial position with reasonable debt levels by most measures, reasonable valuation levels, growth in earnings per share and good cash flow from operations. We feel these strengths outweigh the fact that the company has had somewhat disappointing return on equity."]
 
-print("tfid_test_features",tfid_test_features)
+tfid_test_features = tfidvectorizer.transform(test_set)
+tfid_test_features1 = tfidvectorizer.transform(article)
+print("test_set",test_set)
+#print("tfid_test_features",tfid_test_features)
 
 """Classification using TF-IDF features"""
 
@@ -114,22 +117,23 @@ SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
 SVM.fit(tfid_train_features,training_labels)
 
 predictions_SVM = SVM.predict(tfid_test_features)
+predictions_SVM1 = SVM.predict(tfid_test_features1)
+print('category=',predictions_SVM1)
+
+# print("Support Vector Machine using TF-IDF\n")
+# print("Accuracy: ",accuracy_score(predictions_SVM, test_labels)*100,"\n")
+
+# print("Classification Report\n")
+# print(classification_report(test_labels,predictions_SVM))
 
 
-print("Support Vector Machine using TF-IDF\n")
-print("Accuracy: ",accuracy_score(predictions_SVM, test_labels)*100,"\n")
+# #Plotting the confusion matrix
+# cm = confusion_matrix(test_labels, predictions_SVM)
+# ax= plt.subplot()
+# sns.heatmap(cm, annot=True, ax = ax);
 
-print("Classification Report\n")
-print(classification_report(test_labels,predictions_SVM))
-
-
-#Plotting the confusion matrix
-cm = confusion_matrix(test_labels, predictions_SVM)
-ax= plt.subplot()
-sns.heatmap(cm, annot=True, ax = ax);
-
-# labels, title and ticks
-ax.set_xlabel('Predicted labels');ax.set_ylabel('True labels'); 
-ax.set_title('Confusion Matrix'); 
-ax.xaxis.set_ticklabels(['business', 'entertainment','health','technology'],rotation =45); 
-ax.yaxis.set_ticklabels(['business', 'entertainment','health','technology'],rotation =45);
+# # labels, title and ticks
+# ax.set_xlabel('Predicted labels');ax.set_ylabel('True labels'); 
+# ax.set_title('Confusion Matrix'); 
+# ax.xaxis.set_ticklabels(['business', 'entertainment','health','technology'],rotation =45); 
+# ax.yaxis.set_ticklabels(['business', 'entertainment','health','technology'],rotation =45);
