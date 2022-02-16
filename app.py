@@ -6,7 +6,8 @@ import string
 # from heapq import nlargest
 import heapq
 from flask import Flask , render_template , request
-
+import pickle
+from pickle import load
 
 # todo:Add imports
 import nltk
@@ -170,13 +171,13 @@ def predict_category():
     tfid_test_features1 = Tfidf_from_pickle.transform(normalized_sentences)
     category_output = SVM_from_pickle.predict(tfid_test_features1)
     final_category_output = ''
-    if(category_output == 0)
+    if category_output == 0:
         final_category_output = 'business'
-    else if(category_output == 1) 
+    elif category_output == 1: 
         final_category_output = 'entertainment'
-    else if(category_output == 2)
+    elif category_output == 2:
         final_category_output = 'health'
-    else    
+    else :  
         final_category_output = 'technology'
 
     # final_category_output = category_output == 0 if 'business' : category_output == 1 ? 'entertainment' : category_output == 2 ? 'health' : 'technology'
