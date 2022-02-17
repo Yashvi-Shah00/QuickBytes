@@ -157,6 +157,11 @@ def prediction():
     return render_template('summary_display.html', summary=summarizedTextOutput)
 
         # print(summarise(text))
+
+@app.route("/input2")
+def input2():
+        return render_template( "index2.html" )
+
 @app.route("/process_category" , methods = ["POST"] )
 
 def predict_category():
@@ -164,21 +169,25 @@ def predict_category():
 
     get_sentences =  read_article()
     normalized_sentences = normalize_corpus(get_sentences)
+    normalizedTextOutput =  [". ".join(normalized_sentences)]
+    # normalizedTextOutput2 =  ". ".join(normalized_sentences)
+    print("normalizedTextOutput",normalizedTextOutput)
 
     Tfidf_from_pickle = load(open('models/tfidf_model.pkl', 'rb'))
     SVM_from_pickle = load(open('models/svm_model.pkl', 'rb'))
 
-    tfid_test_features1 = Tfidf_from_pickle.transform(normalized_sentences)
+    tfid_test_features1 = Tfidf_from_pickle.transform(normalizedTextOutput)
     category_output = SVM_from_pickle.predict(tfid_test_features1)
+
     final_category_output = ''
     if category_output == 0:
-        final_category_output = 'business'
+        final_category_output = 'Business'
     elif category_output == 1: 
-        final_category_output = 'entertainment'
+        final_category_output = 'Entertainment'
     elif category_output == 2:
-        final_category_output = 'health'
+        final_category_output = 'Health'
     else :  
-        final_category_output = 'technology'
+        final_category_output = 'Science & Technology'
 
     # final_category_output = category_output == 0 if 'business' : category_output == 1 ? 'entertainment' : category_output == 2 ? 'health' : 'technology'
 
