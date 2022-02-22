@@ -4,10 +4,11 @@ from spacy.lang.en.stop_words import STOP_WORDS
 import string
 # from string import punctuation
 # from heapq import nlargest
-import heapq
+# import heapq
 from flask import Flask , render_template , request
 import pickle
 from pickle import load
+import random
 
 # todo:Add imports
 import nltk
@@ -45,6 +46,36 @@ def home():
 def input():
         return render_template( "index.html" )
 
+@app.route("/select_newspaper")
+def select_newspaper():
+        return render_template( "select_newspaper.html" )
+
+def crawl_website(urlList):
+  for i in range(0,5):
+    num = random.randint(20, 100)
+    print(num)
+    required_url = urlList[num]
+    final_url_list.append(required_url)
+
+@app.route("/process_newspaper" , methods = ["POST"] )
+def display_content():
+        newspaper_name = request.form["n1"]
+        if newspaper_name == 'Ndtv':
+            newspaper_link = 'https://www.ndtv.com/'
+        elif newspaper_name == 'Indian Express':
+            newspaper_link = 'https://indianexpress.com/'
+        else:
+            newspaper_link = 'https://www.hindustantimes.com/'
+
+        news_paper1 = newspaper.build(newspaper_link,memoize_articles=False)
+        urlData1 = []
+        final_url_list = []
+
+        for article in news_paper1.articles:
+            urlData1.append(article.url)
+        crawl_website(urlData1)
+        print(final_url_list)
+        return render_template( "list_articles.html" )
 
 
 
