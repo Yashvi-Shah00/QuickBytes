@@ -9,6 +9,7 @@ from flask import Flask , render_template , request
 import pickle
 from pickle import load
 import random
+import newspaper
 
 # todo:Add imports
 import nltk
@@ -38,54 +39,94 @@ from normalization import normalize_corpus
 app = Flask(__name__)
 
 
-@app.route("/home")
+@app.route("/")
 def home():
-        return render_template( "login_page.html" )
+    return render_template( "login_page.html" )
 
 @app.route("/input")
 def input():
-        return render_template( "index.html" )
+    return render_template( "index.html" )
 
 @app.route("/select_newspaper")
 def select_newspaper():
-        return render_template( "select_newspaper.html" )
+    return render_template( "select_newspaper.html" )
+
+@app.route("/saved_articles")
+def saved_articles():
+    return render_template( "saved_articles.html" )
+
+@app.route("/feedback_form")
+def feedback_form():
+    return render_template( "feedback_form.html" )
+
 
 def crawl_website(urlList):
-  for i in range(0,5):
-    num = random.randint(20, 100)
-    print(num)
-    required_url = urlList[num]
-    final_url_list.append(required_url)
+    selected_url_list = []
+    getCategory=[]
+    for i in range(0,5):
+        num = random.randint(20, 100)
+        print(num)
+        required_url = urlList[num]
+        required_url = 'hindi'
+        if "hindi" in required_url:
+            num1 = random.randint(20, 100)
+            required_url = urlList[num1]
+        selected_url_list.append(required_url)
+        article_category = predict_category(required_url) 
+        getCategory.append(article_category)
+
+    return selected_url_list,getCategory
+
+# def generate_number(urlList):
+#     num = random.randint(20, 100)
+#     required_url = urlList[num]
+#     return required_url
+
 
 @app.route("/process_newspaper" , methods = ["POST"] )
 def display_content():
-        newspaper_name = request.form["n1"]
-        if newspaper_name == 'Ndtv':
-            newspaper_link = 'https://www.ndtv.com/'
-        elif newspaper_name == 'Indian Express':
-            newspaper_link = 'https://indianexpress.com/'
-        else:
-            newspaper_link = 'https://www.hindustantimes.com/'
+    newspaper_name = request.form["n1"]
+    print("newspaper_name",newspaper_name)
+    if newspaper_name == 'Ndtv':
+        newspaper_link = 'https://www.ndtv.com/'
+    elif newspaper_name == 'Indian Express':
+        newspaper_link = 'https://indianexpress.com/'
+    else:
+        newspaper_link = 'https://www.hindustantimes.com/'
 
-        news_paper1 = newspaper.build(newspaper_link,memoize_articles=False)
-        urlData1 = []
-        final_url_list = []
+    news_paper1 = newspaper.build(newspaper_link,memoize_articles=False)
+    urlData1 = []
+    # final_url_list = []
 
-        for article in news_paper1.articles:
-            urlData1.append(article.url)
-        crawl_website(urlData1)
-        print(final_url_list)
-        return render_template( "list_articles.html" )
+    for article in news_paper1.articles:
+        urlData1.append(article.url)
+        # article_url = predict_category(article.url) 
+
+    final_url_list,final_category_list = crawl_website(urlData1)
+    print("final_url_list",final_url_list)
+    print("final_category_list",final_category_list)
+    # getCategory = predict_category()
+    return render_template( "list_articles.html",headlines= final_url_list,newspaper_name=newspaper_name,category_name=final_category_list)
 
 
 
-def read_article():
+def read_article(url):
     # file = open(file_name, "r")
     # filedata = file.readlines()
-    input_article = request.form["z1"]             
+
+    # url = request.form["z1"]             
+    article = newspaper.Article(url, language="en")
+
+    article.download()
+    article.parse()
+    print("article.text",article.text)
+    input_article = article.text             
+
+    # input_article = request.form["z1"]             
+
 
     # print("Article:",input_article)
-    article=[]
+    # article=[]
     filedata = list(input_article.split(". "))
     print("filedata:",filedata)
 
@@ -148,16 +189,16 @@ def build_similarity_matrix(sentences, stop_words):
 
 
 @app.route("/process" , methods = ["POST"] )
-
 def prediction():
     top_n = 10
-    print("check1")
     # nltk.download("stopwords")
     stop_words = stopwords.words('english')
     summarize_text = []
+    url = request.form["z1"]             
+    print("check1",url)
 
     # Step 1 - Read text anc split it
-    get_sentences =  read_article()
+    get_sentences =  read_article(url)
     print("get_sentences:",get_sentences)
     print("stop_words:",stop_words)
     normalized_sentences = normalize_corpus(get_sentences)
@@ -193,12 +234,12 @@ def prediction():
 def input2():
         return render_template( "index2.html" )
 
-@app.route("/process_category" , methods = ["POST"] )
+# @app.route("/process_category" , methods = ["POST"] )
 
-def predict_category():
+def predict_category(get_url):
     print("check2")
 
-    get_sentences =  read_article()
+    get_sentences =  read_article(get_url)
     normalized_sentences = normalize_corpus(get_sentences)
     normalizedTextOutput =  [". ".join(normalized_sentences)]
     # normalizedTextOutput2 =  ". ".join(normalized_sentences)
@@ -212,7 +253,7 @@ def predict_category():
 
     final_category_output = ''
     if category_output == 0:
-        final_category_output = 'Business'
+        final_category_output = 'Business & Politics'
     elif category_output == 1: 
         final_category_output = 'Entertainment'
     elif category_output == 2:
@@ -222,6 +263,7 @@ def predict_category():
 
     # final_category_output = category_output == 0 if 'business' : category_output == 1 ? 'entertainment' : category_output == 2 ? 'health' : 'technology'
 
-    return render_template('summary_display.html', summary=final_category_output)
+    # return render_template('summary_display.html', summary=final_category_output)
+    return final_category_output
 
 app.run(host="localhost" , port=8080)

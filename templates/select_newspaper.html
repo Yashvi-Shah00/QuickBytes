@@ -49,12 +49,12 @@
   <div class="topnav">
     <a href="#"><b><i>QuickBytes</i></b></a>
     <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Change Newspaper</a>
-    <a href="./saved_articles.html"><i
+    <a href="./saved_articles"><i
         class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
     <div class="topnav-right">
-      <a href="./feedback_form.html"><i
+      <a href="./feedback_form"><i
           class="fa fa-pencil" aria-hidden="true"></i> Feedback</a>
-      <a href="./login_page.html"><i class="fa fa-user-o"
+      <a href="./login_page"><i class="fa fa-user-o"
           aria-hidden="true"></i> Logout?</a>
     </div>
   </div>
@@ -71,7 +71,7 @@
           <div class="col-lg-4 col-md-12 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" class="img-fluid" />
+                <img src="../static/selectNewspaper/img/ndtv.png" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
@@ -84,14 +84,9 @@
                 </p>
                 <form action='/process_newspaper' method="post">                    
                   <div class="input">
-                      <!-- <textarea class='input-text' id="tutorial" name="z1" rows="20" cols="70" ></textarea><br> -->
-                      <button class="btn" style="color: #628bcc;" name="n1">Read</button>
-                  </div>
-                          
+                      <button class="btn" style="color: #628bcc;" name="n1" value="Ndtv">Read</button>
+                  </div>                          
               </form>
-      
-                <!-- <a href="./list_articles.html"
-                  class="btn" style="color: #628bcc;">Read</a> -->
               </div>
             </div>
           </div>
@@ -99,7 +94,7 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/023.jpg" class="img-fluid" />
+                <img src="../static/selectNewspaper/img/indianexp.jpg" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
@@ -110,7 +105,11 @@
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
                 </p>
-                <a href="#!" class="btn" style="color: #628bcc;">Read</a>
+                <form action='/process_newspaper' method="post">                    
+                  <div class="input">
+                      <button class="btn" style="color: #628bcc;" name="n1" value="Indian Express">Read</button>
+                  </div>                          
+              </form>
               </div>
             </div>
           </div>
@@ -118,18 +117,22 @@
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                <img src="../static/selectNewspaper/img/ht.png" class="img-fluid" width="516px" height="270.9px"/>
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Times of India</h5>
+                <h5 class="card-title">Hindustan Times</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
                 </p>
-                <a href="#!" class="btn" style="color: #628bcc;">Read</a>
+                <form action='/process_newspaper' method="post">                    
+                  <div class="input">
+                      <button class="btn" style="color: #628bcc;" name="n1" value="Hindustan Times">Read</button>
+                  </div>                          
+                </form>
               </div>
             </div>
           </div>

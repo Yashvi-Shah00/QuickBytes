@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="../static/listArticles/assets/img/favicon.ico">
+	<!-- <link rel="icon" href="../static/listArticles/assets/img/favicon.ico"> -->
 	<title>Latest Articles</title>
 	<!-- Bootstrap core CSS -->
 	<link href="../static/listArticles/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -15,8 +15,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="../static/listArticles/assets/css/mediumish.css" rel="stylesheet">
-	<link rel="stylesheet" href="../static/listArticles/css/mdb.min.css" />
-	<link rel="stylesheet" href="../static/listArticles/css/style.css" />
+	<link rel="stylesheet" href="../static/listArticles/assets/css/mdb.min.css" />
+	<link rel="stylesheet" href="../static/listArticles/assets/css/style.css" />
 	<style>
 		.topnav {
 			overflow: hidden;
@@ -52,15 +52,15 @@
 <body style="padding-top: 0;">
 	<div class="topnav">
 		<a
-			href="./select_newspaper.html"><b><i>QuickBytes</i></b></a>
-		<a href="./select_newspaper.html"><i
+			href="./select_newspaper"><b><i>QuickBytes</i></b></a>
+		<a href="./select_newspaper"><i
 				class="fa fa-newspaper-o" aria-hidden="true"></i> Change Newspaper</a>
-		<a href="./saved_articles.html"><i
+		<a href="./saved_articles"><i
 				class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
 		<div class="topnav-right">
-			<a href="./feedback_form.html"><i
+			<a href="./feedback_form"><i
 					class="fa fa-pencil" aria-hidden="true"></i> Feedback</a>
-			<a href="./login_page.html"><i
+			<a href="./login_page"><i
 					class="fa fa-user-o" aria-hidden="true"></i> Logout?</a>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 ================================================== -->
 	<div class="container">
 		<div class="mainheading">
-			<h2>Selected Newspaper Name</h2>
+			<h2>{{newspaper_name}}</h2>
 		</div>
 		<!-- End Site Title
 ================================================== -->
@@ -78,26 +78,37 @@
 	================================================== -->
 		<section class="featured-posts">
 			<div class="section-title">
-				<h2><span>Latest Posts</span></h2>
+				<h2><span>Headlines</span></h2>
 			</div>
 			<div class="card-columns listfeaturedtag">
 
 				<!-- begin post -->
+    
+				{%for i in range(0,5):%}
 				<div class="card">
 					<div class="row">
 						<div class="col-md-5 wrapthumbnail">
-							<a href="post.html">
-								<div class="thumbnail" style="background-image:url(../static/listArticles/assets/img/demopic/1.jpg);">
-								</div>
-							</a>
+							<!-- <a href="post.html"> -->
+							<div class="thumbnail">
+								<img src="../static/listArticles/assets/img/scitech.jpg" width="230px" height="258px">
+							</div>
+							<!-- </a> -->
 						</div>
 						<div class="col-md-7">
 							<div class="card-block">
-								<h2 class="card-title"><a
-										href="./summary_display.html">Article
-										1</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
+								<form action='/process' method="post">                    
+									<div class="input">
+										<button class="btn" name="z1" value= "{{ headlines[i] }}">{{ category_name[i] }}</button>
+									</div>                          
+								</form>
+				  
+								<!-- <h2 class="card-title"><a
+										href="./summary_display.html">{{ category_name[i] }}</a>
+								</h2> -->
+										<!-- <h2 class="card-title"><a
+											href="./summary_display.html">Article {{i+1}}</a></h2> -->
+									<h4 class="card-text">{{ headlines[i]}}</h4>
+								<!-- <h4 class="card-text">{{ category_name[i]}}</h4> -->
 								<div class="metafooter">
 									<div class="wrapfooter">
 
@@ -105,7 +116,7 @@
 											<span class="post-date">22 July 2017</span><span class="dot"></span>
 										</span>
 										<span class="post-read-more"><a
-												href="./saved_articles.html"
+												href="./saved_articles"
 												title="Save Article"><svg class="svgIcon-use" width="25" height="25"
 													viewbox="0 0 25 25">
 													<path
@@ -118,110 +129,10 @@
 						</div>
 					</div>
 				</div>
+				{%endfor%}
 				<!-- end post -->
 
-				<!-- begin post -->
-				<div class="card">
-					<div class="row">
-						<div class="col-md-5 wrapthumbnail">
-							<a href="#">
-								<div class="thumbnail" style="background-image:url(../static/listArticles/assets/img/demopic/1.jpg);">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-7">
-							<div class="card-block">
-								<h2 class="card-title"><a href="#">Article 2</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
-								<div class="metafooter">
-									<div class="wrapfooter">
 
-										<span class="author-meta">
-											<span class="post-date">22 July 2017</span><span class="dot"></span>
-										</span>
-										<span class="post-read-more"><a href="https://efv-datascience.ifi.lmu.de/"
-												title="Save Article"><svg class="svgIcon-use" width="25" height="25"
-													viewbox="0 0 25 25">
-													<path
-														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
-														fill-rule="evenodd"></path>
-												</svg></a></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--end post -->
-
-				<!-- begin post -->
-				<div class="card">
-					<div class="row">
-						<div class="col-md-5 wrapthumbnail">
-							<a href="post.html">
-								<div class="thumbnail" style="background-image:url(../static/listArticles/assets/img/demopic/1.jpg);">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-7">
-							<div class="card-block">
-								<h2 class="card-title"><a href="post.html">Article 3</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
-								<div class="metafooter">
-									<div class="wrapfooter">
-
-										<span class="author-meta">
-											<span class="post-date">22 July 2017</span><span class="dot"></span>
-										</span>
-										<span class="post-read-more"><a href="post.html" title="Save Article"><svg
-													class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
-													<path
-														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
-														fill-rule="evenodd"></path>
-												</svg></a></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end post -->
-
-				<!-- begin post -->
-				<div class="card">
-					<div class="row">
-						<div class="col-md-5 wrapthumbnail">
-							<a href="post.html">
-								<div class="thumbnail" style="background-image:url(../static/listArticles/assets/img/demopic/1.jpg);">
-								</div>
-							</a>
-						</div>
-						<div class="col-md-7">
-							<div class="card-block">
-								<h2 class="card-title"><a href="post.html">Article 4</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
-								<div class="metafooter">
-									<div class="wrapfooter">
-
-										<span class="author-meta">
-											<span class="post-date">22 July 2017</span><span class="dot"></span>
-										</span>
-										<span class="post-read-more"><a href="post.html" title="Save Article"><svg
-													class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25">
-													<path
-														d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
-														fill-rule="evenodd"></path>
-												</svg></a></span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end post -->
 
 			</div>
 		</section>
