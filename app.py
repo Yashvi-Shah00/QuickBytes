@@ -10,6 +10,7 @@ import pickle
 from pickle import load
 import random
 import newspaper
+import datetime
 
 # todo:Add imports
 import nltk
@@ -67,10 +68,11 @@ def crawl_website(urlList):
         num = random.randint(20, 100)
         print(num)
         required_url = urlList[num]
-        required_url = 'hindi'
         if "hindi" in required_url:
+            print("*Hindi1",num,required_url)
             num1 = random.randint(20, 100)
             required_url = urlList[num1]
+            print("*Hindi2",num1,required_url)
         selected_url_list.append(required_url)
         article_category = predict_category(required_url) 
         getCategory.append(article_category)
@@ -106,7 +108,13 @@ def display_content():
     print("final_url_list",final_url_list)
     print("final_category_list",final_category_list)
     # getCategory = predict_category()
-    return render_template( "list_articles.html",headlines= final_url_list,newspaper_name=newspaper_name,category_name=final_category_list)
+    
+    mydate = datetime.datetime.now()
+    day = mydate.strftime("%d")
+    month = mydate.strftime("%B")
+    year = mydate.strftime("%Y")
+    currentDate = day+" "+month+", "+year
+    return render_template( "list_articles.html",headlines= final_url_list,newspaper_name=newspaper_name,category_name=final_category_list,currentDate=currentDate)
 
 
 
@@ -208,7 +216,7 @@ def prediction():
 
     # Step 3 - Rank sentences in similarity martix
     sentence_similarity_graph = nx.from_numpy_array(sentence_similarity_martix)
-    scores = nx.pagerank(sentence_similarity_graph)
+    scores = nx.pagerank_numpy(sentence_similarity_graph)
     print("scores",scores)
 
     # Step 4 - Sort the rank and pick top sentences

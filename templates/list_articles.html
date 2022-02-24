@@ -45,23 +45,18 @@
 
 		.topnav-right {
 			float: right;
-		}
+		}		
 	</style>
 </head>
 
 <body style="padding-top: 0;">
 	<div class="topnav">
-		<a
-			href="./select_newspaper"><b><i>QuickBytes</i></b></a>
-		<a href="./select_newspaper"><i
-				class="fa fa-newspaper-o" aria-hidden="true"></i> Change Newspaper</a>
-		<a href="./saved_articles"><i
-				class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
+		<a href="./select_newspaper"><b><i>QuickBytes</i></b></a>
+		<a href="./select_newspaper"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Change Newspaper</a>
+		<a href="./saved_articles"><i class="fa fa-floppy-o" aria-hidden="true"></i> Saved articles</a>
 		<div class="topnav-right">
-			<a href="./feedback_form"><i
-					class="fa fa-pencil" aria-hidden="true"></i> Feedback</a>
-			<a href="./login_page"><i
-					class="fa fa-user-o" aria-hidden="true"></i> Logout?</a>
+			<a href="./feedback_form"><i class="fa fa-pencil" aria-hidden="true"></i> Feedback</a>
+			<a href="./login_page"><i class="fa fa-user-o" aria-hidden="true"></i> Logout?</a>
 		</div>
 	</div>
 
@@ -83,40 +78,56 @@
 			<div class="card-columns listfeaturedtag">
 
 				<!-- begin post -->
-    
+
 				{%for i in range(0,5):%}
 				<div class="card">
 					<div class="row">
 						<div class="col-md-5 wrapthumbnail">
 							<!-- <a href="post.html"> -->
+							{%if category_name[i] == 'Business & Politics'%}
 							<div class="thumbnail">
-								<img src="../static/listArticles/assets/img/scitech.jpg" width="230px" height="258px">
+								<img src="../static/listArticles/assets/img/bp2.jpg" width="200px" height="258px">
 							</div>
+							{%elif category_name[i] == 'Entertainment'%}
+							<div class="thumbnail">
+								<img src="../static/listArticles/assets/img/entertainment2.jpg" width="200px"
+									height="258px">
+							</div>
+							{%elif category_name[i] == 'Health'%}
+							<div class="thumbnail">
+								<img src="../static/listArticles/assets/img/health2.jpg" width="200px" height="258px">
+							</div>
+							{%else%}
+							<div class="thumbnail">
+								<img src="../static/listArticles/assets/img/scitech2.jpg" width="200px" height="258px">
+							</div>
+							{% endif %}
 							<!-- </a> -->
 						</div>
 						<div class="col-md-7">
 							<div class="card-block">
-								<form action='/process' method="post">                    
+								<form action='/process' method="post">
 									<div class="input">
-										<button class="btn" name="z1" value= "{{ headlines[i] }}">{{ category_name[i] }}</button>
-									</div>                          
+										<button class="btn" name="z1" value="{{ headlines[i] }}"
+											style="background-color:#fff; border:0px; padding-left: 0px; ">{{
+											category_name[i] }}</button>
+									</div>
 								</form>
-				  
+
 								<!-- <h2 class="card-title"><a
 										href="./summary_display.html">{{ category_name[i] }}</a>
 								</h2> -->
-										<!-- <h2 class="card-title"><a
+								<!-- <h2 class="card-title"><a
 											href="./summary_display.html">Article {{i+1}}</a></h2> -->
-									<h4 class="card-text">{{ headlines[i]}}</h4>
+								<h4 class="card-text">{{ headlines[i]}}</h4>
 								<!-- <h4 class="card-text">{{ category_name[i]}}</h4> -->
 								<div class="metafooter">
 									<div class="wrapfooter">
 
 										<span class="author-meta">
-											<span class="post-date">22 July 2017</span><span class="dot"></span>
+											<span class="post-date">{{ currentDate }}</span><span class="dot"></span>
 										</span>
-										<span class="post-read-more"><a
-												href="./saved_articles"
+										<span class="post-read-more"><a href="./saved_articles"
 												title="Save Article"><svg class="svgIcon-use" width="25" height="25"
 													viewbox="0 0 25 25">
 													<path
