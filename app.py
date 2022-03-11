@@ -21,9 +21,19 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 #import rouge
-import sys
-sys.path.insert(1, 'D:\School\Sem 7\Major project\Final Project\QuickBytes\Preprocessing')
+
+import sys, os
+sys.path.append(os.path.join(sys.path[0],'Preprocessing'))
 from normalization import normalize_corpus
+
+
+# import Preprocessing
+# from myproject.models import some_model
+# from normalization import normalize_corpus
+
+# import sys
+# sys.path.insert(1, 'D:\School\Sem 7\Major project\Final Project\QuickBytes\Preprocessing')
+# from normalization import normalize_corpus
 # import ssl
 # try:
 #     _create_unverified_https_context = ssl._create_unverified_context
