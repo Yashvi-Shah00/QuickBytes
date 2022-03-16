@@ -250,9 +250,9 @@ def prediction():
 
         # print(summarise(text))
 
-@app.route("/input2")
-def input2():
-        return render_template( "index2.html" )
+# @app.route("/input2")
+# def input2():
+#         return render_template( "index2.html" )
 
 # @app.route("/process_category" , methods = ["POST"] )
 
