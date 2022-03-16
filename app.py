@@ -15,6 +15,8 @@ import datetime
 # todo:Add imports
 import nltk
 nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('omw-1.4')
 from nltk.corpus import stopwords
 from nltk.cluster.util import cosine_distance
 import numpy as np
