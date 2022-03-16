@@ -56,9 +56,9 @@ app = Flask(__name__)
 def home():
     return render_template( "login_page.html" )
 
-@app.route("/input")
-def input():
-    return render_template( "index.html" )
+# @app.route("/input")
+# def input():
+#     return render_template( "index.html" )
 
 @app.route("/select_newspaper")
 def select_newspaper():
