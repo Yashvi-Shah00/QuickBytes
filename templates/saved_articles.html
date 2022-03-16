@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="../static/listArticles/assets/img/favicon.ico">
 	<title>Saved Articles</title>
 	<!-- Bootstrap core CSS -->
 	<link href="../static/listArticles/assets/css/bootstrap.min.css" rel="stylesheet">
@@ -94,17 +93,23 @@
 								<h2 class="card-title"><a
 										href="./summary_display.html">Article
 										1</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
+								<h4 class="card-text">{{article.url}}</h4>
 								<div class="metafooter">
 									<div class="wrapfooter">
 
 										<span class="author-meta">
 											<span class="post-date"><a href="#">Read Full Article</a></span><span
 												class="dot"></span>
-											<span class="post-date"><a
-													href="./process">Read
-													Summary</a></span><span class="dot"></span>
+											<span class="post-date">
+												<form action='/process' method="post">
+													<div class="input">
+														<button name="z1" value="{{ article.url }}"
+															style="background-color:#fff; border:0px; padding-left: 0px; ">Read Summary
+														</button>
+													</div>
+												</form>
+												</span>
+													<span class="dot"></span>
 										</span>
 									</div>
 								</div>
@@ -126,8 +131,7 @@
 						<div class="col-md-7">
 							<div class="card-block">
 								<h2 class="card-title"><a href="#">Article 2</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
+								<h4 class="card-text">https://economictimes.indiatimes.com/news/defence/errant-indian-missile-nearly-led-to-pakistan-retaliatory-strike/articleshow/90268915.cms</h4>
 								<div class="metafooter">
 									<div class="wrapfooter">
 
@@ -156,8 +160,7 @@
 						<div class="col-md-7">
 							<div class="card-block">
 								<h2 class="card-title"><a href="#">Article 3</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
+								<h4 class="card-text">https://www.ndtv.com/world-news/earthquake-in-japan-earthquake-near-tokyo-japan-today-with-magnitude-7-1-2826975</h4>
 								<div class="metafooter">
 									<div class="wrapfooter">
 
@@ -186,8 +189,7 @@
 						<div class="col-md-7">
 							<div class="card-block">
 								<h2 class="card-title"><a href="#">Article 4</a></h2>
-								<h4 class="card-text">This is a longer card with supporting text below as a natural
-									lead-in to additional content. This content is a little bit longer.</h4>
+								<h4 class="card-text">https://telanganatoday.com/telangana-ssc-exams-rescheduled-new-exam-dates-here</h4>
 								<div class="metafooter">
 									<div class="wrapfooter">
 

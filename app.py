@@ -27,6 +27,7 @@ import networkx as nx
 import sys, os
 sys.path.append(os.path.join(sys.path[0],'Preprocessing'))
 from normalization import normalize_corpus
+import json
 
 
 # import Preprocessing
@@ -66,7 +67,9 @@ def select_newspaper():
 
 @app.route("/saved_articles")
 def saved_articles():
-    return render_template( "saved_articles.html" )
+    f = open('article_data.json')
+    get_article = json.load(f)
+    return render_template( "saved_articles.html",article=get_article)
 
 @app.route("/feedback_form")
 def feedback_form():
@@ -244,6 +247,12 @@ def prediction():
     summarizedTextOutput =  ". ".join(summarize_text)
 
     # return summary
+    article = {}
+    article['url'] = url
+    article['summary'] = summarizedTextOutput
+    with open('article_data.json', 'w') as f:
+        json.dump(article, f)
+
     print("summary",type(summarizedTextOutput))
     print("summary",summarizedTextOutput)
     return render_template('summary_display.html', summary=summarizedTextOutput)
@@ -257,8 +266,6 @@ def prediction():
 # @app.route("/process_category" , methods = ["POST"] )
 
 def predict_category(get_url):
-    print("check2")
-
     get_sentences =  read_article(get_url)
     normalized_sentences = normalize_corpus(get_sentences)
     normalizedTextOutput =  [". ".join(normalized_sentences)]
